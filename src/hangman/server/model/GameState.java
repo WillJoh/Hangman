@@ -74,7 +74,7 @@ public class GameState {
         
         result += "; Remaining guesses: " + remainingGuesses + "; Score: " + score;
         if(won || lost) {
-            result += "; type \"new game\" to start a new game"; 
+            result += "; type \"start game\" to start a new game"; 
         } else {
             result += "; type your next guess";
         }
@@ -100,6 +100,7 @@ public class GameState {
     }
     
     public void guessChar(char guess) {
+        guess = Character.toLowerCase(guess);
         if(!won && !lost) {
             won = true;
             for(int i = 0; i < currState.length; i++) {

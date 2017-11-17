@@ -5,9 +5,7 @@
  */
 package hangman.server.net;
 
-import hangman.server.controller.Controller;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -44,18 +42,14 @@ public class Server {
         client.setSoLinger(true, 10000);
         client.setSoTimeout(2000000);
         ClientHandler handler = new ClientHandler(this, client);
-        synchronized (clients) {
-            clients.add(handler);
-        }
+        clients.add(handler);
         Thread handlerThread = new Thread(handler);
         handlerThread.setPriority(Thread.MAX_PRIORITY);
         handlerThread.start();
     }
     
     void removeHandler(ClientHandler handler) {
-        synchronized (clients) {
-            clients.remove(handler);
-        }
+        clients.remove(handler);
     }
     
     private void setPortNr(String[] args) {
